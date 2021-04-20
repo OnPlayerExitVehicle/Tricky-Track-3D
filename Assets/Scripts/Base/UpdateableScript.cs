@@ -2,8 +2,8 @@ namespace TrickyTrack.Base
 {
     public class UpdateableScript : BaseScript
     {
-        protected virtual void BaseFixedUpdate(){}
-        protected virtual void BaseUpdate(){}
-        protected virtual void BaseLateUpdate(){}
+        public virtual void BaseFixedUpdate(){}
+        public virtual void BaseUpdate(){}
+        public virtual void BaseLateUpdate(){}
     }
 }

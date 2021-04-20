@@ -1,23 +1,38 @@
+using TrickyTrack.Base;
 using System;
+using System.Linq;
+using TrickyTrack.Base.Utility;
+using UnityEngine;
 
 namespace TrickyTrack.Management
 {
-    using Base;
+    
     public class GameManager: UpdateableScript
     {
-        protected override void BaseAwake()
+        [SerializeField] private readonly BaseScript[] scriptArray = new BaseScript[0];
+        public override void BaseAwake()
         {
-            throw new NotImplementedException();
+            scriptArray.CallEvents((baseScript) => { baseScript.BaseAwake(); });
         }
 
-        protected override void BaseStart()
+        public override void BaseStart()
         {
-            throw new NotImplementedException();
+            scriptArray.CallEvents((baseScript) => { baseScript.BaseStart(); });
         }
 
-        protected override void BaseUpdate()
+        public override void BaseFixedUpdate()
         {
-            throw new NotImplementedException();
+            scriptArray.CallEvents<UpdateableScript>((updateableScript) => { updateableScript.BaseFixedUpdate(); });
+        }
+
+        public override void BaseUpdate()
+        {
+            scriptArray.CallEvents<UpdateableScript>((updateableScript) => { updateableScript.BaseUpdate(); });
+        }
+
+        public override void BaseLateUpdate()
+        {
+            scriptArray.CallEvents<UpdateableScript>((updateableScript) => { updateableScript.BaseLateUpdate(); });
         }
     }
 }
